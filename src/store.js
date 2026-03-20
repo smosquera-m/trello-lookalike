@@ -72,6 +72,7 @@ export const useStore = create((set, get) => ({
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ startColumnId, endColumnId, startIdx, endIdx, taskId }),
+        keepalive: true
       });
     } catch (error) {
       console.error('Error moving task:', error);
