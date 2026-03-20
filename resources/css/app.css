@@ -167,7 +167,6 @@ header {
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
   transform: rotate(2deg) scale(1.02);
   z-index: 1000;
-  transition: none !important;
 }
 
 /* Card content */
