@@ -1,93 +1,58 @@
-# 🚀 Trello Clone - Premium Kanban Board
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-This is a premium Trello clone, designed with a modern **Glassmorphism** aesthetic. The frontend is built with **React** and the backend is powered by **Laravel 13**, equipped with a **MySQL** database to handle persistent, multi-user production task management seamlessly.
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-![Application Preview](./src/assets/bg.png)
+## About Laravel
 
-## ✨ Key Features
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- **Drag & Drop**: Intuitive card management system that allows moving tasks between columns or reordering them.
-- **Ultra Premium Design**:
-  - **Glassmorphism**: Blur and transparency effects on columns and cards.
-  - **Abstract Background**: HD image generated specifically for a professional aesthetic.
-  - **Micro-animations**: Smooth transitions on hover and when reordering elements.
-- **Robust Data Persistence**: Complete migration to a **Laravel + MySQL** backend architecture to support production-ready concurrent user updates, completely replacing isolated `localStorage`.
-- **Instant Optimistic Updates**: The frontend leverages Zustand to instantly reflect visual changes while communicating silently with the backend API.
-- **Complete Management**:
-  - Dynamic creation of new lists (columns) using a seamless inline form.
-  - Quick addition of cards within any list.
-  - One-click task deletion.
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-## 🛠️ Technologies Used
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-| Technology | Usage |
-| :--- | :--- |
-| **React 18** | Main UI framework. |
-| **Laravel 13** | Powerful PHP backend providing a robust RESTful API. |
-| **MySQL** | Reliable relational database to store boards, columns, and tasks. |
-| **Vite** | Lightning-fast build tool to compile the frontend effortlessly. |
-| **@hello-pangea/dnd** | Robust library for Drag & Drop system (modern react-beautiful-dnd fork). |
-| **Zustand** | Lightweight global state management configured for optimistic API syncing. |
-| **Lucide React** | Set of modern and consistent vector icons. |
-| **Vanilla CSS** | Custom styles with CSS variables and modern background filters. |
+## Learning Laravel
 
-## 🏗️ Project Structure
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+
+In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+
+You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+
+## Agentic Development
+
+Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
 
 ```bash
-trello-lookalike/
-├── api/             # Laravel 13 Backend
-│   ├── app/Models/  # Column & Task Eloquent Models
-│   ├── routes/      # api.php & web.php
-│   └── public/      # Hosts the compiled React app
-├── src/             # React Frontend
-│   ├── assets/      # Background images and icons
-│   ├── components/  # React Components (Board, Column, Card)
-│   ├── store.js     # State logic (Zustand + API integration)
-│   └── App.jsx      # Main structure and header
-└── package.json     # Node dependencies & build scripts
+composer require laravel/boost --dev
+
+php artisan boost:install
 ```
 
-## 🚀 Installation and Execution
+Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
 
-The project is structured to make development and deployment friction-free. Due to the hybrid nature of the architecture, the React frontend is compiled directly into the Laravel application's explicit root structure.
+## Contributing
 
-### 1. Database Setup
-1. Open your MySQL client and ensure a database named `trello_lookalike` exists.
-2. In the `api` folder, update the `.env` file with your connection info:
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=trello_lookalike
-DB_USERNAME=root
-DB_PASSWORD=1234
-```
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-### 2. Backend Initialization
-Open a terminal in the `api/` directory:
-```bash
-cd api
-composer install
-php artisan migrate
-```
+## Code of Conduct
 
-### 3. Build the Frontend
-Open a terminal in the root `trello-lookalike/` folder and compile the React application explicitly into the Laravel `public` directory:
-```bash
-npm install
-npm run build
-cp -r dist/* api/public/
-```
-*(Note: If you work on Windows, simply copy the contents of the `dist` folder into `api/public/` manually if `cp` is unavailable).*
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-### 4. Run the Application
-You only need a single server pointing to the Laravel backend!
-```bash
-cd api
-php artisan serve
-```
-Open your browser at [http://127.0.0.1:8000](http://127.0.0.1:8000), and enjoy a fully integrated Laravel + React experience without keeping an `npm run dev` process alive.
+## Security Vulnerabilities
 
----
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-Developed with ❤️ for a superior task management experience.
+## License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
