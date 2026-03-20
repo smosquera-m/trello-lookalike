@@ -23,7 +23,7 @@ const Column = ({ column, tasks, index }) => {
   };
 
   return (
-    <div className="column">
+    <div className="column" data-column-id={column.id}>
       <div className="column-header">
         <h3 className="column-title">{column.title}</h3>
         <MoreHorizontal className="icon" style={{ cursor: 'pointer', color: 'var(--text-dim)' }} />

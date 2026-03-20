@@ -8,11 +8,59 @@ const Board = () => {
   const { tasks, columns, columnOrder, moveTask, addColumn } = useStore();
   const [isAddingColumn, setIsAddingColumn] = useState(false);
   const [newColumnTitle, setNewColumnTitle] = useState('');
+  const lastMousePos = React.useRef({ x: 0, y: 0 });
+
+  React.useEffect(() => {
+    const handleMouseMove = (e) => {
+      lastMousePos.current = { x: e.clientX, y: e.clientY };
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
 
-    if (!destination) return;
+    if (!destination) {
+      // User requested: if dropped outside, put in the closest column
+      const x = lastMousePos.current.x;
+      const y = lastMousePos.current.y;
+      
+      const columnEls = document.querySelectorAll('.column[data-column-id]');
+      let closestColId = null;
+      let minDistance = Infinity;
+
+      columnEls.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const elCenterX = rect.left + rect.width / 2;
+        const elCenterY = rect.top + rect.height / 2;
+        
+        // Euclidean distance to column center
+        const dist = Math.sqrt(Math.pow(x - elCenterX, 2) + Math.pow(y - elCenterY, 2));
+        if (dist < minDistance) {
+          minDistance = dist;
+          closestColId = el.getAttribute('data-column-id');
+        }
+      });
+
+      if (closestColId) {
+        const isSameColumn = closestColId === source.droppableId;
+        const destLength = columns[closestColId].taskIds.length;
+        // User requested: if it's the exact same column, leave it at the bottom
+        // (which means index = destLength - 1 because we remove 1 element first).
+        const insertIndex = isSameColumn ? (destLength - 1) : destLength;
+
+        // Only move it if we are actually placing it at the bottom or moving it to a new column
+        moveTask(
+          source.droppableId,
+          closestColId,
+          source.index,
+          insertIndex, // put at bottom
+          draggableId
+        );
+      }
+      return;
+    }
 
     if (
       destination.droppableId === source.droppableId &&
