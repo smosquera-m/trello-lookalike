@@ -10,7 +10,7 @@ export const useStore = create((set, get) => ({
 
   fetchBoard: async () => {
     try {
-      const res = await fetch(`${API_URL}/board`);
+      const res = await fetch(`${API_URL}/board?_t=${Date.now()}`);
       if (!res.ok) throw new Error('Failed to fetch');
       const data = await res.json();
       set({
