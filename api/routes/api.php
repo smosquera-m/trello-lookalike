@@ -11,5 +11,5 @@ Route::get('/user', function (Request $request) {
 Route::get('/board', [BoardController::class, 'loadBoard']);
 Route::post('/columns', [BoardController::class, 'addColumn']);
 Route::post('/tasks', [BoardController::class, 'addTask']);
-Route::put('/tasks/move', [BoardController::class, 'moveTask']);
+Route::post('/tasks/move', [BoardController::class, 'moveTask']);
 Route::delete('/tasks/{taskId}', [BoardController::class, 'deleteTask']);

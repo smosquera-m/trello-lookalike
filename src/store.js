@@ -68,15 +68,14 @@ export const useStore = create((set, get) => ({
 
     // 2. API Call
     try {
-      await fetch(`${API_URL}/tasks/move`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ startColumnId, endColumnId, startIdx, endIdx, taskId }),
-        keepalive: true
-      });
+      const blob = new Blob(
+        [JSON.stringify({ startColumnId, endColumnId, startIdx, endIdx, taskId })],
+        { type: 'application/json' }
+      );
+      // sendBeacon ensures the network request is fired even if the page unloads
+      navigator.sendBeacon(`${API_URL}/tasks/move`, blob);
     } catch (error) {
-      console.error('Error moving task:', error);
-      // Let it fail silently or refetch
+      console.error('Error moving task via beacon:', error);
       get().fetchBoard();
     }
   },
