@@ -144,7 +144,7 @@ header {
   margin-bottom: 0.75rem;
   cursor: grab;
   color: var(--text-main);
-  transition: background-color 0.2s ease, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
@@ -152,7 +152,6 @@ header {
 
 .card:hover {
   background: rgba(255, 255, 255, 0.08);
-  transform: translateY(-2px);
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
   border-color: var(--primary);
 }
