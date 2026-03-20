@@ -39,11 +39,12 @@ export const useStore = create(
           const endColumn = state.columns[endColumnId];
 
           if (startColumnId === endColumnId) {
-            const newTaskIds = Array.from(startColumn.taskIds);
+            const newTaskIds = [...startColumn.taskIds];
             newTaskIds.splice(startIdx, 1);
             newTaskIds.splice(endIdx, 0, taskId);
 
             return {
+              ...state,
               columns: {
                 ...state.columns,
                 [startColumnId]: {
@@ -55,14 +56,14 @@ export const useStore = create(
           }
 
           // Moving from one column to another
-          const startTaskIds = Array.from(startColumn.taskIds);
+          const startTaskIds = [...startColumn.taskIds];
           startTaskIds.splice(startIdx, 1);
           const newStartColumn = {
             ...startColumn,
             taskIds: startTaskIds,
           };
 
-          const endTaskIds = Array.from(endColumn.taskIds);
+          const endTaskIds = [...endColumn.taskIds];
           endTaskIds.splice(endIdx, 0, taskId);
           const newEndColumn = {
             ...endColumn,
@@ -70,6 +71,7 @@ export const useStore = create(
           };
 
           return {
+            ...state,
             columns: {
               ...state.columns,
               [startColumnId]: newStartColumn,
