@@ -35,12 +35,8 @@ const Card = ({ task, index, columnId }) => {
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided, snapshot) => {
-        if (snapshot.isDragging) {
-          return ReactDOM.createPortal(
-            renderCard(provided, snapshot),
-            document.body
-          );
-        }
+        // Let the library handle dragging positioning and use the standard inline rendering method.
+        // If snapshot.isDropAnimating is true, it shouldn't get stuck.
         return renderCard(provided, snapshot);
       }}
     </Draggable>
