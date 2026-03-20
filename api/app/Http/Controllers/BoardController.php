@@ -16,8 +16,8 @@ class BoardController extends Controller
         }])->get();
 
         $data = [
-            'tasks' => (object)[],
-            'columns' => (object)[],
+            'tasks' => [],
+            'columns' => [],
             'columnOrder' => []
         ];
 

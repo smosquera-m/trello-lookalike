@@ -1,6 +1,6 @@
 # 🚀 Trello Clone - Premium Kanban Board
 
-This is a premium Trello clone, designed with a modern **Glassmorphism** aesthetic. The frontend is built with **React** and the backend is powered by **Laravel 12**, equipped with a **MySQL** database to handle persistent, multi-user production task management seamlessly.
+This is a premium Trello clone, designed with a modern **Glassmorphism** aesthetic. The frontend is built with **React** and the backend is powered by **Laravel 13**, equipped with a **MySQL** database to handle persistent, multi-user production task management seamlessly.
 
 ![Application Preview](./src/assets/bg.png)
 
@@ -23,7 +23,7 @@ This is a premium Trello clone, designed with a modern **Glassmorphism** aesthet
 | Technology | Usage |
 | :--- | :--- |
 | **React 18** | Main UI framework. |
-| **Laravel 12** | Powerful PHP backend providing a robust RESTful API. |
+| **Laravel 13** | Powerful PHP backend providing a robust RESTful API. |
 | **MySQL** | Reliable relational database to store boards, columns, and tasks. |
 | **Vite** | Lightning-fast build tool to compile the frontend effortlessly. |
 | **@hello-pangea/dnd** | Robust library for Drag & Drop system (modern react-beautiful-dnd fork). |
@@ -35,7 +35,7 @@ This is a premium Trello clone, designed with a modern **Glassmorphism** aesthet
 
 ```bash
 trello-lookalike/
-├── api/             # Laravel 12 Backend
+├── api/             # Laravel 13 Backend
 │   ├── app/Models/  # Column & Task Eloquent Models
 │   ├── routes/      # api.php & web.php
 │   └── public/      # Hosts the compiled React app
