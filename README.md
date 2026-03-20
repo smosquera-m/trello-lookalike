@@ -1,67 +1,67 @@
 # 🚀 Trello Clone - Premium Kanban Board
 
-Este es un clon premium de Trello, diseñado con una estética moderna **Glassmorphism**, construido con **React** y optimizado para una gestión de tareas fluida y persistente.
+This is a premium Trello clone, designed with a modern **Glassmorphism** aesthetic, built with **React**, and optimized for smooth and persistent task management.
 
-![Preview de la Aplicación](./src/assets/bg.png)
+![Application Preview](./src/assets/bg.png)
 
-## ✨ Características Principales
+## ✨ Key Features
 
-- **Arrastrar y Soltar (Drag & Drop)**: Sistema de gestión de tarjetas intuitivo que permite mover tareas entre columnas o reordenarlas.
-- **Diseño Ultra Premium**:
-  - **Glassmorphism**: Efectos de desenfoque y transparencia en columnas y tarjetas.
-  - **Fondo Abstracto**: Imagen HD generada específicamente para una estética profesional.
-  - **Micro-animaciones**: Transiciones suaves al pasar el ratón y al reordenar elementos.
-- **Persistencia de Datos**: Integración con `localStorage` a través de **Zustand**, lo que permite que tus cambios se guarden automáticamente sin necesidad de una base de datos externa.
-- **Gestión Completa**:
-  - Creación dinámica de nuevas listas (columnas).
-  - Adición rápida de tarjetas dentro de cualquier lista.
-  - Eliminación de tareas con un solo clic.
+- **Drag & Drop**: Intuitive card management system that allows moving tasks between columns or reordering them.
+- **Ultra Premium Design**:
+  - **Glassmorphism**: Blur and transparency effects on columns and cards.
+  - **Abstract Background**: HD image generated specifically for a professional aesthetic.
+  - **Micro-animations**: Smooth transitions on hover and when reordering elements.
+- **Data Persistence**: Integration with `localStorage` through **Zustand**, allowing your changes to be saved automatically without the need for an external database.
+- **Complete Management**:
+  - Dynamic creation of new lists (columns).
+  - Quick addition of cards within any list.
+  - One-click task deletion.
 
-## 🛠️ Tecnologías Aplicadas
+## 🛠️ Technologies Used
 
-| Tecnología | Uso |
+| Technology | Usage |
 | :--- | :--- |
-| **React 18** | Framework principal para la interfaz de usuario. |
-| **Vite** | Herramienta de construcción ultrarrápida (Build Tool). |
-| **@hello-pangea/dnd** | Librería robusta para el sistema de Drag & Drop (fork moderno de react-beautiful-dnd). |
-| **Zustand** | Gestión de estado global ligera y persistente. |
-| **Lucide React** | Set de iconos vectoriales modernos y consistentes. |
-| **Vanilla CSS** | Estilos personalizados con variables CSS y filtros de fondo modernos. |
+| **React 18** | Main UI framework. |
+| **Vite** | Lightning-fast build tool. |
+| **@hello-pangea/dnd** | Robust library for Drag & Drop system (modern react-beautiful-dnd fork). |
+| **Zustand** | Lightweight and persistent global state management. |
+| **Lucide React** | Set of modern and consistent vector icons. |
+| **Vanilla CSS** | Custom styles with CSS variables and modern background filters. |
 
-## 🏗️ Estructura del Proyecto
+## 🏗️ Project Structure
 
 ```bash
 src/
-├── assets/          # Imágenes de fondo e iconos
-├── components/      # Componentes de React (Board, Column, Card)
-├── store.js         # Lógica central del estado (Zustand + Persist)
-├── index.css        # Sistema de diseño y estilos globales
-└── App.jsx          # Estructura principal y cabecera
+├── assets/          # Background images and icons
+├── components/      # React Components (Board, Column, Card)
+├── store.js         # Core state logic (Zustand + Persist)
+├── index.css        # Design system and global styles
+└── App.jsx          # Main structure and header
 ```
 
-## 💡 Soluciones Técnicas Destacadas
+## 💡 Highlighted Technical Solutions
 
-### Corrección de Posicionamiento con React Portals
-Uno de los mayores retos técnicos fue el conflicto entre el `backdrop-filter` (efecto de cristal) y el sistema de posicionamiento fijo del arrastre. 
+### Positioning Correction with React Portals
+One of the biggest technical challenges was the conflict between the `backdrop-filter` (glass effect) and the fixed positioning system of dragging. 
 
-Para solucionarlo, implementamos **React Portals** en el componente `Card`. Cuando una tarjeta comienza a ser arrastrada, se extrae de la estructura de la columna y se renderiza directamente en el `document.body`. Esto evita que el contexto de apilamiento del filtro de desenfoque afecte a las coordenadas de la tarjeta, garantizando que esta permanezca siempre bajo el puntero del ratón de forma precisa.
+To solve this, we implemented **React Portals** in the `Card` component. When a card starts being dragged, it is extracted from the column's structure and rendered directly into the `document.body`. This prevents the stacking context of the blur filter from affecting the card's coordinates, ensuring it always remains precisely under the mouse pointer.
 
-## 🚀 Instalación y Ejecución
+## 🚀 Installation and Execution
 
-Para ejecutar este proyecto de forma local, sigue estos pasos:
+To run this project locally, follow these steps:
 
-1.  **Clona o descarga** este repositorio.
-2.  Abre una terminal en la carpeta raíz del proyecto.
-3.  Instala las dependencias:
+1.  **Clone or download** this repository.
+2.  Open a terminal in the project's root folder.
+3.  Install the dependencies:
     ```bash
     npm install
     ```
-4.  Inicia el servidor de desarrollo:
+4.  Start the development server:
     ```bash
     npm run dev
     ```
-5.  Abre tu navegador en la dirección que aparezca en la terminal (por defecto [http://localhost:5173](http://localhost:5173)).
+5.  Open your browser at the address that appears in the terminal (default [http://localhost:5173](http://localhost:5173)).
 
 ---
 
-Desarrollado con ❤️ para una experiencia de gestión de tareas superior.
+Developed with ❤️ for a superior task management experience.
