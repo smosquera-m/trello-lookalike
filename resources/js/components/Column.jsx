@@ -29,24 +29,7 @@ const Column = ({ column, tasks, index }) => {
         <MoreHorizontal className="icon" style={{ cursor: 'pointer', color: 'var(--text-dim)' }} />
       </div>
 
-      <Droppable
-        droppableId={column.id}
-        type="task"
-        renderClone={(provided, snapshot, rubric) => {
-          const task = tasks[rubric.source.index];
-          return (
-            <div
-              ref={provided.innerRef}
-              {...provided.draggableProps}
-              {...provided.dragHandleProps}
-              className={`card card-dragging`}
-              style={provided.draggableProps.style}
-            >
-              <div className="card-content">{task.content}</div>
-            </div>
-          );
-        }}
-      >
+      <Droppable droppableId={column.id} type="task">
         {(provided, snapshot) => (
           <div
             ref={provided.innerRef}

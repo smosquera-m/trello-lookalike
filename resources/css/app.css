@@ -100,7 +100,6 @@ header {
 /* Column Styling */
 .column {
   background: var(--glass);
-  backdrop-filter: blur(16px);
   border: 1px solid var(--glass-border);
   border-radius: 16px;
   width: var(--column-width);
