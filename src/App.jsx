@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Layout, Search, Bell, Ghost, Settings } from 'lucide-react';
 import Board from './components/Board';
+import { useStore } from './store';
 
 function App() {
+  const fetchBoard = useStore((state) => state.fetchBoard);
+  const isLoading = useStore((state) => state.isLoading);
+
+  useEffect(() => {
+    fetchBoard();
+  }, [fetchBoard]);
+
   return (
     <>
       <header>
@@ -44,7 +52,13 @@ function App() {
         </div>
       </header>
 
-      <Board />
+      {isLoading ? (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1, color: 'white' }}>
+          Loading Board...
+        </div>
+      ) : (
+        <Board />
+      )}
     </>
   );
 }
