@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DragDropContext, Droppable } from '@hello-pangea/dnd';
-import { Plus } from 'lucide-react';
+import { Plus, X } from 'lucide-react';
 import Column from './Column';
 import { useStore } from '../store';
 
 const Board = () => {
   const { tasks, columns, columnOrder, moveTask, addColumn } = useStore();
+  const [isAddingColumn, setIsAddingColumn] = useState(false);
+  const [newColumnTitle, setNewColumnTitle] = useState('');
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
@@ -30,9 +32,13 @@ const Board = () => {
     }
   };
 
-  const handleAddColumn = () => {
-    const title = prompt('Enter column title:');
-    if (title) addColumn(title);
+  const handleAddColumn = (e) => {
+    e.preventDefault();
+    if (newColumnTitle.trim()) {
+      addColumn(newColumnTitle.trim());
+      setNewColumnTitle('');
+      setIsAddingColumn(false);
+    }
   };
 
   return (
@@ -52,10 +58,35 @@ const Board = () => {
           );
         })}
 
-        <div className="add-column-card" onClick={handleAddColumn}>
-          <Plus className="icon" style={{ width: '32px', height: '32px', marginBottom: '0.5rem', opacity: 0.5 }} />
-          <span style={{ color: 'var(--text-dim)', fontWeight: 600 }}>Add another list</span>
-        </div>
+        {isAddingColumn ? (
+          <div className="add-column-card is-adding" style={{ justifyContent: 'flex-start', alignItems: 'stretch' }}>
+            <form onSubmit={handleAddColumn} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <input
+                type="text"
+                autoFocus
+                placeholder="Enter list title..."
+                value={newColumnTitle}
+                onChange={(e) => setNewColumnTitle(e.target.value)}
+                className="add-column-input"
+              />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <button type="submit" className="add-column-submit">Add list</button>
+                <button 
+                  type="button" 
+                  className="add-column-cancel"
+                  onClick={() => setIsAddingColumn(false)}
+                >
+                  <X size={20} />
+                </button>
+              </div>
+            </form>
+          </div>
+        ) : (
+          <div className="add-column-card" onClick={() => setIsAddingColumn(true)}>
+            <Plus className="icon" style={{ width: '32px', height: '32px', marginBottom: '0.5rem', opacity: 0.5 }} />
+            <span style={{ color: 'var(--text-dim)', fontWeight: 600 }}>Add another list</span>
+          </div>
+        )}
       </div>
     </DragDropContext>
   );
