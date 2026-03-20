@@ -1,6 +1,6 @@
 # 🚀 Trello Clone - Premium Kanban Board
 
-This is a premium Trello clone, designed with a modern **Glassmorphism** aesthetic, built with **React**, and optimized for smooth and persistent task management.
+This is a premium Trello clone, designed with a modern **Glassmorphism** aesthetic. The frontend is built with **React** and the backend is powered by **Laravel 12**, equipped with a **MySQL** database to handle persistent, multi-user production task management seamlessly.
 
 ![Application Preview](./src/assets/bg.png)
 
@@ -11,9 +11,10 @@ This is a premium Trello clone, designed with a modern **Glassmorphism** aesthet
   - **Glassmorphism**: Blur and transparency effects on columns and cards.
   - **Abstract Background**: HD image generated specifically for a professional aesthetic.
   - **Micro-animations**: Smooth transitions on hover and when reordering elements.
-- **Data Persistence**: Integration with `localStorage` through **Zustand**, allowing your changes to be saved automatically without the need for an external database.
+- **Robust Data Persistence**: Complete migration to a **Laravel + MySQL** backend architecture to support production-ready concurrent user updates, completely replacing isolated `localStorage`.
+- **Instant Optimistic Updates**: The frontend leverages Zustand to instantly reflect visual changes while communicating silently with the backend API.
 - **Complete Management**:
-  - Dynamic creation of new lists (columns).
+  - Dynamic creation of new lists (columns) using a seamless inline form.
   - Quick addition of cards within any list.
   - One-click task deletion.
 
@@ -22,45 +23,70 @@ This is a premium Trello clone, designed with a modern **Glassmorphism** aesthet
 | Technology | Usage |
 | :--- | :--- |
 | **React 18** | Main UI framework. |
-| **Vite** | Lightning-fast build tool. |
+| **Laravel 12** | Powerful PHP backend providing a robust RESTful API. |
+| **MySQL** | Reliable relational database to store boards, columns, and tasks. |
+| **Vite** | Lightning-fast build tool to compile the frontend effortlessly. |
 | **@hello-pangea/dnd** | Robust library for Drag & Drop system (modern react-beautiful-dnd fork). |
-| **Zustand** | Lightweight and persistent global state management. |
+| **Zustand** | Lightweight global state management configured for optimistic API syncing. |
 | **Lucide React** | Set of modern and consistent vector icons. |
 | **Vanilla CSS** | Custom styles with CSS variables and modern background filters. |
 
 ## 🏗️ Project Structure
 
 ```bash
-src/
-├── assets/          # Background images and icons
-├── components/      # React Components (Board, Column, Card)
-├── store.js         # Core state logic (Zustand + Persist)
-├── index.css        # Design system and global styles
-└── App.jsx          # Main structure and header
+trello-lookalike/
+├── api/             # Laravel 12 Backend
+│   ├── app/Models/  # Column & Task Eloquent Models
+│   ├── routes/      # api.php & web.php
+│   └── public/      # Hosts the compiled React app
+├── src/             # React Frontend
+│   ├── assets/      # Background images and icons
+│   ├── components/  # React Components (Board, Column, Card)
+│   ├── store.js     # State logic (Zustand + API integration)
+│   └── App.jsx      # Main structure and header
+└── package.json     # Node dependencies & build scripts
 ```
-
-## 💡 Highlighted Technical Solutions
-
-### Positioning Correction with React Portals
-One of the biggest technical challenges was the conflict between the `backdrop-filter` (glass effect) and the fixed positioning system of dragging. 
-
-To solve this, we implemented **React Portals** in the `Card` component. When a card starts being dragged, it is extracted from the column's structure and rendered directly into the `document.body`. This prevents the stacking context of the blur filter from affecting the card's coordinates, ensuring it always remains precisely under the mouse pointer.
 
 ## 🚀 Installation and Execution
 
-To run this project locally, follow these steps:
+The project is structured to make development and deployment friction-free. Due to the hybrid nature of the architecture, the React frontend is compiled directly into the Laravel application's explicit root structure.
 
-1.  **Clone or download** this repository.
-2.  Open a terminal in the project's root folder.
-3.  Install the dependencies:
-    ```bash
-    npm install
-    ```
-4.  Start the development server:
-    ```bash
-    npm run dev
-    ```
-5.  Open your browser at the address that appears in the terminal (default [http://localhost:5173](http://localhost:5173)).
+### 1. Database Setup
+1. Open your MySQL client and ensure a database named `trello_lookalike` exists.
+2. In the `api` folder, update the `.env` file with your connection info:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=trello_lookalike
+DB_USERNAME=root
+DB_PASSWORD=1234
+```
+
+### 2. Backend Initialization
+Open a terminal in the `api/` directory:
+```bash
+cd api
+composer install
+php artisan migrate
+```
+
+### 3. Build the Frontend
+Open a terminal in the root `trello-lookalike/` folder and compile the React application explicitly into the Laravel `public` directory:
+```bash
+npm install
+npm run build
+cp -r dist/* api/public/
+```
+*(Note: If you work on Windows, simply copy the contents of the `dist` folder into `api/public/` manually if `cp` is unavailable).*
+
+### 4. Run the Application
+You only need a single server pointing to the Laravel backend!
+```bash
+cd api
+php artisan serve
+```
+Open your browser at [http://127.0.0.1:8000](http://127.0.0.1:8000), and enjoy a fully integrated Laravel + React experience without keeping an `npm run dev` process alive.
 
 ---
 
